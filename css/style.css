@@ -18233,3 +18233,18 @@ button.gm-ui-hover-effect:focus {
 .feature_property_slider button:hover {
   outline: none !important;
 }
+
+
+
+.view_add_list {
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  width: 45px;
+}
+.view_add_list span {
+  color: #10b981;
+  font-weight: 900;
+}

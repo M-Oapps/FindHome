@@ -44,6 +44,12 @@
         <li class="treeview"><a href="../../pages/admin/dashboard.php"><i class="flaticon-layers"></i><span>
                     Dashboard</span></a>
         </li>
+        <li class="treeview"><a href="../../pages/admin/user-list.php"><i class="flaticon-user"></i><span>
+                    User/Agent</span></a>
+        <li class="treeview"><a href="../../pages/admin/city-list.php"><i class="flaticon-placeholder"></i><span>
+                    City</span></a>
+        <li class="treeview"><a href="../../pages/admin/property-type-list.php"><i class="flaticon-building"></i><span>
+                    Property Type</span></a>
         <li class="treeview"><a href="../../pages/admin/properties-list.php"><i class="flaticon-home"></i><span>
                     My Properties</span></a>
         </li>

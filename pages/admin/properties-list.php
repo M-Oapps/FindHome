@@ -1,3 +1,49 @@
+<?php
+include("../../include/db_connect.php");
+
+$limit = 5;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$start = ($page - 1) * $limit;
+
+$search = isset($_GET['search']) ? trim($_GET['search']) : '';
+$search_sql = '';
+$params = [];
+
+if (!empty($search)) {
+    $search_sql = "WHERE title LIKE ? OR type LIKE ? OR price LIKE ?";
+    $params = array_fill(0, 3, "%$search%");
+}
+
+// Count total
+$count_sql = "SELECT COUNT(*) FROM properties $search_sql";
+$stmt = $conn->prepare($count_sql);
+$stmt->execute($params);
+$total_properties = $stmt->fetchColumn();
+$total_pages = ceil($total_properties / $limit);
+
+// Fetch data
+$data_sql = "SELECT p.*,(SELECT image_path FROM property_images WHERE property_id = p.id ORDER BY id ASC LIMIT 1) AS image_path 
+    FROM properties p 
+    $search_sql 
+    ORDER BY p.id DESC 
+    LIMIT $start, $limit";
+$stmt = $conn->prepare($data_sql);
+$stmt->execute($params);
+$properties = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Handle delete request
+if (isset($_GET['delete_id'])) {
+    $deleteId = intval($_GET['delete_id']);
+    $stmt = $conn->prepare("DELETE FROM properties WHERE id = ?");
+    $stmt->execute([$deleteId]);
+    // Redirect to avoid re-delete on refresh
+    header("Location: properties-list.php");
+    exit();
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
 
@@ -69,22 +115,16 @@
                                     <ul class="mb0">
                                         <li class="list-inline-item">
                                             <div class="candidate_revew_search_box course fn-520">
-                                                <form class="form-inline my-2">
-                                                    <input class="form-control mr-sm-2" type="search"
-                                                        placeholder="Search Courses" aria-label="Search">
+                                                <form method="GET" class="form-inline my-2">
+                                                    <input class="form-control mr-sm-2" type="search" name="search"
+                                                        value="<?= htmlspecialchars($search ?? '') ?>" placeholder="Search" aria-label="Search">
                                                     <button class="btn my-2 my-sm-0" type="submit"><span
                                                             class="flaticon-magnifying-glass"></span></button>
                                                 </form>
                                             </div>
                                         </li>
-                                        <li class="list-inline-item">
-                                            <div class="dropdown bootstrap-select show-tick dropup">
-                                                <select class="selectpicker show-tick" tabindex="-98">
-                                                    <option>Featured First</option>
-                                                    <option>Recent</option>
-                                                    <option>Old Review</option>
-                                                </select>
-                                            </div>
+                                        <li class="list-inline-item view_add_list" title="Add">
+                                            <a href="../../pages/admin/properties-add.php"><span class="flaticon-plus"></span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -97,214 +137,79 @@
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th scope="col">Listing Title</th>
+                                                        <th scope="col">Property Type</th>
+                                                        <th scope="col">City</th>
                                                         <th scope="col">Date published</th>
-                                                        <th scope="col">Status</th>
-                                                        <th scope="col">View</th>
                                                         <th scope="col">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <th scope="row">
-                                                            <div class="feat_property list favorite_page style2">
-                                                                <div class="thumb">
-                                                                    <img class="img-whp"
-                                                                        src="https://creativelayers.net/themes/findhouse-html/images/property/fp1.jpg"
-                                                                        alt="fp1.jpg">
-                                                                    <div class="thmb_cntnt">
-                                                                        <ul class="tag mb0">
-                                                                            <li class="list-inline-item dn"></li>
-                                                                            <li class="list-inline-item"><a href="#">For
-                                                                                    Rent</a></li>
-                                                                        </ul>
+                                                    <?php
+                                                    foreach ($properties as $property):
+                                                    ?>
+                                                        <tr>
+                                                            <th scope="row">
+                                                                <div class="feat_property list favorite_page style2">
+                                                                    <div class="thumb">
+                                                                        <img class="img-whp"
+                                                                            src="<?= !empty($property['image_path']) ? '../../' . $property['image_path'] : '../../images/default-list.jpg'; ?>"
+                                                                            alt="<?= htmlspecialchars($property['title']) ?>">
+                                                                        <div class="thmb_cntnt">
+                                                                            <ul class="tag mb0">
+                                                                                <li class="list-inline-item dn"></li>
+                                                                                <li class="list-inline-item"><a href="#">For
+                                                                                        <?= htmlspecialchars($property['status']) ?></a></li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="details">
+                                                                        <div class="tc_content">
+                                                                            <h4><?= htmlspecialchars($property['title']) ?></h4>
+                                                                            <p><span class="flaticon-placeholder"></span><?= htmlspecialchars($property['address']) ?></p>
+                                                                            <a class="fp_price text-thm" href="#">$<?= number_format((float)$property['price'], 0) ?><small>/mo</small></a>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="details">
-                                                                    <div class="tc_content">
-                                                                        <h4>Renovated Apartment</h4>
-                                                                        <p><span class="flaticon-placeholder"></span>
-                                                                            1421 San
-                                                                            Pedro St, Los Angeles, CA 90015</p>
-                                                                        <a class="fp_price text-thm"
-                                                                            href="#">$13,000<small>/mo</small></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </th>
-                                                        <td>30 December, 2020</td>
-                                                        <td><span class="status_tag badge">Pending</span></td>
-                                                        <td>2,345</td>
-                                                        <td>
-                                                            <ul class="view_edit_delete_list mb0">
-                                                                <li class="list-inline-item" data-toggle="tooltip"
-                                                                    data-placement="top" title=""
-                                                                    data-original-title="Edit"><a href="#"><span
-                                                                            class="flaticon-edit"></span></a></li>
-                                                                <li class="list-inline-item" data-toggle="tooltip"
-                                                                    data-placement="top" title=""
-                                                                    data-original-title="Delete">
-                                                                    <a href="#"><span
-                                                                            class="flaticon-garbage"></span></a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">
-                                                            <div class="feat_property list favorite_page style2">
-                                                                <div class="thumb">
-                                                                    <img class="img-whp"
-                                                                        src="https://creativelayers.net/themes/findhouse-html/images/property/fp2.jpg"
-                                                                        alt="fp2.jpg">
-                                                                    <div class="thmb_cntnt">
-                                                                        <ul class="tag mb0">
-                                                                            <li class="list-inline-item dn"></li>
-                                                                            <li class="list-inline-item"><a href="#">For
-                                                                                    Rent</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="details">
-                                                                    <div class="tc_content">
-                                                                        <h4>Renovated Apartment</h4>
-                                                                        <p><span class="flaticon-placeholder"></span>
-                                                                            1421 San
-                                                                            Pedro St, Los Angeles, CA 90015</p>
-                                                                        <a class="fp_price text-thm"
-                                                                            href="#">$13,000<small>/mo</small></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </th>
-                                                        <td>30 December, 2020</td>
-                                                        <td><span class="status_tag badge2">Published</span></td>
-                                                        <td>2,345</td>
-                                                        <td>
-                                                            <ul class="view_edit_delete_list mb0">
-                                                                <li class="list-inline-item" data-toggle="tooltip"
-                                                                    data-placement="top" title=""
-                                                                    data-original-title="Edit"><a href="#"><span
-                                                                            class="flaticon-edit"></span></a></li>
-                                                                <li class="list-inline-item" data-toggle="tooltip"
-                                                                    data-placement="top" title=""
-                                                                    data-original-title="Delete">
-                                                                    <a href="#"><span
-                                                                            class="flaticon-garbage"></span></a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th class="active" scope="row">
-                                                            <div class="feat_property list favorite_page style2">
-                                                                <div class="thumb">
-                                                                    <img class="img-whp"
-                                                                        src="https://creativelayers.net/themes/findhouse-html/images/property/fp3.jpg"
-                                                                        alt="fp3.jpg">
-                                                                    <div class="thmb_cntnt">
-                                                                        <ul class="tag mb0">
-                                                                            <li class="list-inline-item dn"></li>
-                                                                            <li class="list-inline-item"><a href="#">For
-                                                                                    Rent</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="details">
-                                                                    <div class="tc_content">
-                                                                        <h4>Renovated Apartment</h4>
-                                                                        <p><span class="flaticon-placeholder"></span>
-                                                                            1421 San
-                                                                            Pedro St, Los Angeles, CA 90015</p>
-                                                                        <a class="fp_price text-thm"
-                                                                            href="#">$13,000<small>/mo</small></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </th>
-                                                        <td>30 December, 2020</td>
-                                                        <td><span class="status_tag badge3">Processing</span></td>
-                                                        <td>2,345</td>
-                                                        <td>
-                                                            <ul class="view_edit_delete_list mb0">
-                                                                <li class="list-inline-item" data-toggle="tooltip"
-                                                                    data-placement="top" title=""
-                                                                    data-original-title="Edit"><a href="#"><span
-                                                                            class="flaticon-edit"></span></a></li>
-                                                                <li class="list-inline-item" data-toggle="tooltip"
-                                                                    data-placement="top" title=""
-                                                                    data-original-title="Delete">
-                                                                    <a href="#"><span
-                                                                            class="flaticon-garbage"></span></a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">
-                                                            <div class="feat_property list favorite_page style2">
-                                                                <div class="thumb">
-                                                                    <img class="img-whp"
-                                                                        src="https://creativelayers.net/themes/findhouse-html/images/property/fp4.jpg"
-                                                                        alt="fp4.jpg">
-                                                                    <div class="thmb_cntnt">
-                                                                        <ul class="tag mb0">
-                                                                            <li class="list-inline-item dn"></li>
-                                                                            <li class="list-inline-item"><a href="#">For
-                                                                                    Rent</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="details">
-                                                                    <div class="tc_content">
-                                                                        <h4>Renovated Apartment</h4>
-                                                                        <p><span class="flaticon-placeholder"></span>
-                                                                            1421 San
-                                                                            Pedro St, Los Angeles, CA 90015</p>
-                                                                        <a class="fp_price text-thm"
-                                                                            href="#">$13,000<small>/mo</small></a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </th>
-                                                        <td>30 December, 2020</td>
-                                                        <td><span class="status_tag badge">Pending</span></td>
-                                                        <td>2,345</td>
-                                                        <td>
-                                                            <ul class="view_edit_delete_list mb0">
-                                                                <li class="list-inline-item" data-toggle="tooltip"
-                                                                    data-placement="top" title=""
-                                                                    data-original-title="Edit"><a href="#"><span
-                                                                            class="flaticon-edit"></span></a></li>
-                                                                <li class="list-inline-item" data-toggle="tooltip"
-                                                                    data-placement="top" title=""
-                                                                    data-original-title="Delete">
-                                                                    <a href="#"><span
-                                                                            class="flaticon-garbage"></span></a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                    </tr>
+                                                            </th>
+                                                            <td><?= htmlspecialchars($property['type']) ?></td>
+                                                            <td><?= htmlspecialchars($property['city']) ?></td>
+                                                            <td><?= date("d M, Y", strtotime($property['created_at'])) ?></td>
+                                                            <td>
+                                                                <ul class="view_edit_delete_list mb0">
+                                                                    <li class="list-inline-item" title="Edit">
+                                                                        <a href="properties-edit.php?id=<?= $property['id'] ?>"><span class="flaticon-edit"></span></a>
+                                                                    </li>
+                                                                    <li class="list-inline-item" data-toggle="tooltip" title="Delete">
+                                                                        <a href="properties-list.php?delete_id=<?= $property['id']; ?>" onclick="return confirmDelete();">
+                                                                            <span class="flaticon-garbage"></span>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
                                                 </tbody>
                                             </table>
                                         </div>
                                         <div class="mbp_pagination">
                                             <ul class="page_navigation">
-                                                <li class="page-item disabled">
-                                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-                                                        <span class="flaticon-left-arrow"></span> Prev</a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item active" aria-current="page">
-                                                    <a class="page-link" href="#">2 <span
-                                                            class="sr-only">(current)</span></a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">29</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#"><span
-                                                            class="flaticon-right-arrow"></span></a>
-                                                </li>
+                                                <?php if ($page > 1): ?>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?page=<?= $page - 1 ?>&search=<?= urlencode($search) ?>"><span class="flaticon-left-arrow"></span> Prev</a>
+                                                    </li>
+                                                <?php endif; ?>
+
+                                                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                                                    <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                                                        <a class="page-link" href="?page=<?= $i ?>&search=<?= urlencode($search) ?>"><?= $i ?></a>
+                                                    </li>
+                                                <?php endfor; ?>
+
+                                                <?php if ($page < $total_pages): ?>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="?page=<?= $page + 1 ?>&search=<?= urlencode($search) ?>"><span class="flaticon-right-arrow"></span></a>
+                                                    </li>
+                                                <?php endif; ?>
                                             </ul>
                                         </div>
                                     </div>
@@ -325,7 +230,11 @@
 
         <a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
     </div>
-    
+    <script>
+        function confirmDelete() {
+            return confirm('Are you sure you want to delete this Properties?');
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>

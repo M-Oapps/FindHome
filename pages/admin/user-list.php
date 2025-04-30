@@ -201,7 +201,6 @@ if (isset($_GET['delete_id'])) {
                                                 <?php endif; ?>
                                             </ul>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

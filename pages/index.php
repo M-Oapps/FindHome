@@ -132,7 +132,7 @@
                     <div class="col-lg-12">
                         <div class="feature_property_slider owl-carousel owl-theme">
                             <div class="item">
-                                <a href="page-listing-single-v1.html">
+                                <a href="property-detail.php">
                                     <div class="feat_property">
                                         <div class="thumb">
                                             <img class="img-whp"

@@ -26,7 +26,7 @@
         <?php include "../include/header.php"; ?>
         <!--	Header end  -->
 
-        <div class="single_page_listing_style">
+        <div class="single_page_listing_style p0 mt85 md-mt0">
             <div class="container-fluid p0">
                 <div class="row">
                     <div class="col-sm-6 col-lg-6 p0">

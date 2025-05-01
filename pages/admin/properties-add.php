@@ -1,18 +1,25 @@
 <?php
 include("../../include/db_connect.php");
+session_start();
+
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
+    header("Location: ../login.php");
+    exit();
+}
+
 $types = $conn->query("SELECT name FROM property_type")->fetchAll(PDO::FETCH_ASSOC);
 $cities = $conn->query("SELECT name FROM cities")->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
         $stmt = $conn->prepare("INSERT INTO properties (
-            title, description, type, status, rooms, price, area,
+            user_id, title, description, type, status, rooms, price, area,
             address, state, city, neighborhood, zip_code, latitude, longitude,
             area_size, size_prefix, land_area, land_area_postfix, bedrooms,
             bathrooms, garages, garage_size, year_built, video_url, virtual_tour_url,
             is_featured, attachment_url
         ) VALUES (
-            :title, :description, :type, :status, :rooms, :price, :area,
+            :user_id, :title, :description, :type, :status, :rooms, :price, :area,
             :address, :state, :city, :neighborhood, :zip_code, :latitude, :longitude,
             :area_size, :size_prefix, :land_area, :land_area_postfix, :bedrooms,
             :bathrooms, :garages, :garage_size, :year_built, :video_url, :virtual_tour_url,
@@ -20,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         )");
 
         $stmt->execute([
+            ':user_id' => $_SESSION['user_id'],
             ':title' => $_POST['title'],
             ':description' => $_POST['description'],
             ':type' => $_POST['type'],
@@ -115,11 +123,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             foreach ($_POST['plan_title'] as $i => $title) {
                 $imgPath = '';
-
                 if (!empty($_FILES['plan_image_path']['name'][$i]) && $_FILES['plan_image_path']['error'][$i] === 0) {
                     $filename = time() . '_' . basename($_FILES['plan_image_path']['name'][$i]);
                     $targetFile = $floorImageDir . $filename;
-
                     if (move_uploaded_file($_FILES['plan_image_path']['tmp_name'][$i], $targetFile)) {
                         $imgPath = $floorImageUrl . $filename;
                     }
@@ -502,7 +508,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <button type="button" class="btn admore_btn mb30" id="addPlanBtn">Add More</button>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-12">
+                                                <div class="col-lg-6 col-xl-4">
                                                     <div class="my_profile_setting_input form-group">
                                                         <label for="planTitle">Plan Title</label>
                                                         <input type="text" class="form-control" id="planTitle" name="plan_title[]">
@@ -538,24 +544,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <input type="text" class="form-control" id="planSize" name="plan_size[]">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-xl-4">
-                                                    <div class="my_profile_setting_input form-group">
-                                                        <label>Plan Image</label>
-                                                        <div class="avatar-upload">
-                                                            <div class="avatar-edit">
-                                                                <input type="file" id="planImage" name="plan_image_path[]" accept=".png, .jpg, .jpeg">
-                                                                <label for="planImage" id="planImagefile"></label>
-                                                            </div>
-                                                            <div class="avatar-preview">
-                                                                <div class="form-control" id="imagePreview"></div>
-                                                            </div>
-                                                        </div>
+                                                <div class="col-lg-4">
+                                                    <div class="wrap-custom-file">
+                                                        <input type="file" name="plan_image_path[]" id="planImage" accept=".gif, .jpg, .jpeg, .png">
+                                                        <label for="planImage">
+                                                            <span><i class="flaticon-download"></i> Upload Plan Image</span>
+                                                        </label>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-12">
+                                                <div class="col-xl-8">
                                                     <div class="my_profile_setting_textarea mt30-991">
                                                         <label for="planDescription">Plan Description</label>
-                                                        <textarea class="form-control" id="planDescription" name="plan_description[]" rows="7"></textarea>
+                                                        <textarea class="form-control" id="planDescription" name="plan_description[]" rows="8"></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -636,6 +636,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         });
     </script>
     <script>
+        document.getElementById('planImage').addEventListener('change', function(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const label = document.querySelector('label[for="planImage"]');
+                    label.style.backgroundImage = `url('${e.target.result}')`;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+    </script>
+    <script>
         document.getElementById('addPlanBtn').addEventListener('click', function() {
             let original = document.querySelector('.floor-plan-block');
             let clone = original.cloneNode(true);
@@ -667,8 +680,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             document.getElementById('imagePreview').textContent = fileName;
         });
     </script>
-
-
 </body>
 
 </html>

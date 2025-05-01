@@ -2,9 +2,8 @@
 session_start();
 include("../../include/db_connect.php");
 
-// Check if user is logged in
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
+    header("Location: ../login.php");
     exit();
 }
 

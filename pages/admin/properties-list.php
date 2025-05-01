@@ -1,42 +1,69 @@
 <?php
+session_start();
 include("../../include/db_connect.php");
 
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
+    header("Location: ../login.php");
+    exit();
+}
+
+$role = $_SESSION['role'];
+$user_id = $_SESSION['user_id'];
+
 $limit = 5;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = isset($_GET['page']) ? max((int)$_GET['page'], 1) : 1;
 $start = ($page - 1) * $limit;
 
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
-$search_sql = '';
 $params = [];
+$where_clauses = [];
 
 if (!empty($search)) {
-    $search_sql = "WHERE title LIKE ? OR type LIKE ? OR price LIKE ?";
-    $params = array_fill(0, 3, "%$search%");
+    $where_clauses[] = "(p.title LIKE ? OR p.type LIKE ? OR p.price LIKE ?)";
+    $params = array_merge($params, ["%$search%", "%$search%", "%$search%"]);
 }
 
-// Count total
-$count_sql = "SELECT COUNT(*) FROM properties $search_sql";
+if ($role === 'agent') {
+    $where_clauses[] = "p.user_id = ?";
+    $params[] = $user_id;
+}
+
+$where_sql = '';
+if (!empty($where_clauses)) {
+    $where_sql = 'WHERE ' . implode(' AND ', $where_clauses);
+}
+
+// Count query
+$count_sql = "SELECT COUNT(*) FROM properties p $where_sql";
 $stmt = $conn->prepare($count_sql);
 $stmt->execute($params);
 $total_properties = $stmt->fetchColumn();
 $total_pages = ceil($total_properties / $limit);
 
-// Fetch data
-$data_sql = "SELECT p.*,(SELECT image_path FROM property_images WHERE property_id = p.id ORDER BY id ASC LIMIT 1) AS image_path 
-    FROM properties p 
-    $search_sql 
-    ORDER BY p.id DESC 
-    LIMIT $start, $limit";
+// Data fetch query
+$data_sql = "SELECT p.*,
+                (SELECT image_path FROM property_images WHERE property_id = p.id ORDER BY id ASC LIMIT 1) AS image_path 
+            FROM properties p 
+            $where_sql 
+            ORDER BY p.id DESC 
+            LIMIT $start, $limit";
+
 $stmt = $conn->prepare($data_sql);
 $stmt->execute($params);
 $properties = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// Handle delete request
-if (isset($_GET['delete_id'])) {
-    $deleteId = intval($_GET['delete_id']);
-    $stmt = $conn->prepare("DELETE FROM properties WHERE id = ?");
-    $stmt->execute([$deleteId]);
-    // Redirect to avoid re-delete on refresh
+// Handle delete
+if (isset($_GET['delete_id']) && is_numeric($_GET['delete_id'])) {
+    $deleteId = (int)$_GET['delete_id'];
+
+    if ($role === 'agent') {
+        $stmt = $conn->prepare("DELETE FROM properties WHERE id = ? AND user_id = ?");
+        $stmt->execute([$deleteId, $user_id]);
+    } else {
+        $stmt = $conn->prepare("DELETE FROM properties WHERE id = ?");
+        $stmt->execute([$deleteId]);
+    }
+
     header("Location: properties-list.php");
     exit();
 }
@@ -173,7 +200,7 @@ if (isset($_GET['delete_id'])) {
                                                             </th>
                                                             <td><?= htmlspecialchars($property['type']) ?></td>
                                                             <td><?= htmlspecialchars($property['city']) ?></td>
-                                                            <td><?= date("d M, Y", strtotime($property['created_at'])) ?></td>
+                                                            <td><?= isset($property['created_at']) ? date("d M, Y", strtotime($property['created_at'])) : 'N/A' ?></td>
                                                             <td>
                                                                 <ul class="view_edit_delete_list mb0">
                                                                     <li class="list-inline-item" title="Edit">
@@ -188,6 +215,11 @@ if (isset($_GET['delete_id'])) {
                                                             </td>
                                                         </tr>
                                                     <?php endforeach; ?>
+                                                    <?php if (empty($properties)): ?>
+                                                        <tr>
+                                                            <td colspan="5" class="text-center text-danger">No properties found.</td>
+                                                        </tr>
+                                                    <?php endif; ?>
                                                 </tbody>
                                             </table>
                                         </div>

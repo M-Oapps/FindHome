@@ -2,6 +2,11 @@
 session_start();
 include("../../include/db_connect.php");
 
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
+    header("Location: ../login.php");
+    exit();
+}
+
 $user_id = $_SESSION['user_id'];
 $profile_updated = false;
 
@@ -331,8 +336,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
             }
         });
     </script>
-
-
 </body>
 
 </html>

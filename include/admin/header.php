@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <header class="header-nav menu_style_home_one style2 navbar-scrolltofixed stricky main-menu">
     <div class="container-fluid p0">
         <!-- Ace Responsive Menu -->
@@ -30,6 +32,20 @@
                 <li class="last">
                     <a href="../contact.php"><span class="title">Contact</span></a>
                 </li>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <li class="user_setting">
+                        <div class="dropdown menu-active">
+                            <a class="btn dropdown-toggle" href="#">
+                                <?php
+                                $user_photo = !empty($_SESSION['photo']) ? '../../../' . $_SESSION['photo'] : '../../images/profile.png';
+                                ?>
+                                <img class="rounded-circle" src="<?php echo htmlspecialchars($user_photo); ?>" alt="profile">
+                                <span class="dn-1199"><?php echo htmlspecialchars($_SESSION['username']); ?>
+                                </span>
+                            </a>
+                        </div>
+                    </li>
+                <?php endif; ?>
             </ul>
         </nav>
     </div>
@@ -44,23 +60,25 @@
         <li class="treeview"><a href="../../pages/admin/dashboard.php"><i class="flaticon-layers"></i><span>
                     Dashboard</span></a>
         </li>
-        <li class="treeview"><a href="../../pages/admin/user-list.php"><i class="flaticon-user"></i><span>
-                    User/Agent</span></a>
-        <li class="treeview"><a href="../../pages/admin/city-list.php"><i class="flaticon-placeholder"></i><span>
-                    City</span></a>
-        <li class="treeview"><a href="../../pages/admin/property-type-list.php"><i class="flaticon-building"></i><span>
-                    Property Type</span></a>
-        <li class="treeview"><a href="../../pages/admin/properties-list.php"><i class="flaticon-home"></i><span>
-                    My Properties</span></a>
-        </li>
-        <li class="treeview"><a href="../../pages/admin/review-list.php"><i class="flaticon-chat"></i><span>
-                    Reviews</span></a>
-        </li>
-        <li class="title"><span>Manage Account</span></li>
-        <li><a href="../../pages/admin/profile.php"><i class="flaticon-user"></i> <span>My Profile</span></a></li>
-        <li><a href="../../pages/admin/change-password.php"><i class="flaticon-box"></i> <span>Change password</span></a></li>
-        <li><a href="../../pages/logout.php"><i class="flaticon-logout"></i> <span>Logout</span></a></li>
-        <!-- <li id="myProperties" class="treeview">
+        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+            <li class="treeview"><a href="../../pages/admin/user-list.php"><i class="flaticon-user"></i><span>
+                        User/Agent</span></a>
+            <li class="treeview"><a href="../../pages/admin/city-list.php"><i class="flaticon-placeholder"></i><span>
+                        City</span></a>
+            <li class="treeview"><a href="../../pages/admin/property-type-list.php"><i class="flaticon-building"></i><span>
+                        Property Type</span></a>
+            <?php endif; ?>
+            <li class="treeview"><a href="../../pages/admin/properties-list.php"><i class="flaticon-home"></i><span>
+                        My Properties</span></a>
+            </li>
+            <li class="treeview"><a href="../../pages/admin/review-list.php"><i class="flaticon-chat"></i><span>
+                        Reviews</span></a>
+            </li>
+            <li class="title"><span>Manage Account</span></li>
+            <li><a href="../../pages/admin/profile.php"><i class="flaticon-user"></i> <span>My Profile</span></a></li>
+            <li><a href="../../pages/admin/change-password.php"><i class="flaticon-box"></i> <span>Change password</span></a></li>
+            <li><a href="../../pages/logout.php"><i class="flaticon-logout"></i> <span>Logout</span></a></li>
+            <!-- <li id="myProperties" class="treeview">
             <a href="../../pages/admin/properties-list.php"><i class="flaticon-home"></i> <span>My Properties</span><i
                     class="fa fa-angle-down pull-right"></i></a>
             <ul class="treeview-menu">

@@ -1,5 +1,11 @@
 <?php
 include("../../include/db_connect.php");
+session_start();
+
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
+    header("Location: ../login.php");
+    exit();
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {

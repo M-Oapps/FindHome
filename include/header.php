@@ -63,7 +63,7 @@
                                 <div class="user_setting_content">
                                     <a class="dropdown-item active" href="admin/profile.php">My Profile</a>
                                     <a class="dropdown-item" href="admin/dashboard.php">Dashboard</a>
-                                    <a class="dropdown-item" href="#">My Properties</a>
+                                    <a class="dropdown-item" href="admin/properties-list.php">My Properties</a>
                                     <a class="dropdown-item" href="logout.php">Log out</a>
                                 </div>
                             </div>

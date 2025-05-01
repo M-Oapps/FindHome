@@ -1,5 +1,12 @@
 <?php
 include("../../include/db_connect.php");
+session_start();
+
+$user_id = $_SESSION['user_id'] ?? null || $_SESSION['role'] ?? null;
+if (!$user_id) {
+    header("Location: ../login.php");
+    exit();
+}
 
 $types = $conn->query("SELECT id, name FROM property_type")->fetchAll(PDO::FETCH_ASSOC);
 $cities = $conn->query("SELECT id, name FROM cities")->fetchAll(PDO::FETCH_ASSOC);
@@ -7,8 +14,8 @@ $cities = $conn->query("SELECT id, name FROM cities")->fetchAll(PDO::FETCH_ASSOC
 if (isset($_GET['id'])) {
     $property_id = intval($_GET['id']);
     // Fetch property data
-    $stmt = $conn->prepare("SELECT * FROM properties WHERE id = ?");
-    $stmt->execute([$property_id]);
+    $stmt = $conn->prepare("SELECT * FROM properties WHERE id = ? AND user_id = ?");
+    $stmt->execute([$property_id, $user_id]);
     $property = $stmt->fetch(PDO::FETCH_ASSOC);
     if (!$property) {
         die("Property not found.");
@@ -21,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
         // 1. Update base property info
         $stmt = $conn->prepare("UPDATE properties SET
+            user_id = :user_id,
             title = :title,
             description = :description,
             type = :type,
@@ -50,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         WHERE id = :id");
 
         $stmt->execute([
+            ':user_id' => $user_id,
             ':title' => $_POST['title'],
             ':description' => $_POST['description'],
             ':type' => $_POST['type'],
@@ -493,6 +502,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         </div>
                                     </div>
                                     <div class="my_dashboard_review mt30">
+                                        <?php
+                                        // Fetch property images
+                                        $stmt = $conn->prepare("SELECT * FROM property_images WHERE property_id = ?");
+                                        $stmt->execute([$property_id]);
+                                        $property_images = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                        ?>
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <h4 class="mb30">Property media</h4>
@@ -501,6 +516,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <ul class="mb0 list-inline" id="imagePreviewList"></ul>
                                             </div>
                                             <div class="col-lg-12">
+                                                <?php if (!empty($property_images)): ?>
+                                                    <ul class="mb0 list-inline" id="existingImageList">
+                                                        <?php foreach ($property_images as $img): ?>
+                                                            <li class="list-inline-item">
+                                                                <div class="portfolio_item">
+                                                                    <img class="img-fluid" src="../../<?= htmlspecialchars($img['image_path']) ?>" alt="Property Image">
+                                                                    <!-- Optional delete link -->
+                                                                    <div class="edu_stats_list" title="Delete">
+                                                                        <a href="delete-image.php?id=<?= $img['id'] ?>&property_id=<?= $property_id ?>" onclick="return confirm('Delete this image?');">
+                                                                            <span class="flaticon-garbage"></span>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        <?php endforeach; ?>
+                                                    </ul>
+                                                <?php endif; ?>
                                                 <div class="portfolio_upload">
                                                     <input type="file" name="images[]" id="imageUploadInput" multiple accept="image/*">
                                                     <div class="icon"><span class="flaticon-download"></span></div>
@@ -511,83 +543,92 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <div class="resume_uploader mb30">
                                                     <h3>Attachments</h3>
                                                     <div class="form-inline d-flex flex-wrap wrap">
-                                                        <input class="upload-path form-control w-75" readonly id="attachmentName">
+                                                        <input class="upload-path form-control w-75" readonly id="attachmentName" name="attachment_name"
+                                                            value="<?= htmlspecialchars(basename($property['attachment_url'] ?? '')) ?>">
                                                         <label class="upload">
-                                                            <input type="file" name="attachment" id="attachmentFile"> Select Attachment
+                                                            <input type="file" name="attachment" id="attachmentFile" accept=".pdf, .doc, .docx, .xls, .xlsx" style="display: none;">
+                                                            Select Attachment
                                                         </label>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="my_dashboard_review mt30">
-                                        <div class="floor-plan-block">
+                                    <?php
+                                    // Fetch floor plans
+                                    $stmt = $conn->prepare("SELECT * FROM property_floorplans WHERE property_id = ?");
+                                    $stmt->execute([$property_id]);
+                                    $floorplans = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                                    ?>
+                                    <?php foreach ($floorplans as $index => $plan): ?>
+                                        <div class="my_dashboard_review mt30 floor-plan-block">
                                             <div class="row">
                                                 <div class="col-lg-12 d-flex flex-wrap center justify-content-between">
                                                     <h4 class="mb30">Floor Plans</h4>
                                                     <div class="plan-header-actions">
-                                                        <button type="button" class="btn admore_btn mb30" id="addPlanBtn">Add More</button>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-12">
-                                                    <div class="my_profile_setting_input form-group">
-                                                        <label for="planTitle">Plan Title</label>
-                                                        <input type="text" class="form-control" id="planTitle" name="plan_title[]">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6 col-xl-4">
-                                                    <div class="my_profile_setting_input form-group">
-                                                        <label for="planBedrooms">Plan Bedrooms</label>
-                                                        <input type="text" class="form-control" id="planBedrooms" name="plan_bedrooms[]">
+                                                        <?php if ($index === 0): ?>
+                                                            <button type="button" class="btn admore_btn mb30" id="addPlanBtn">Add More</button>
+                                                        <?php else: ?>
+                                                            <button type="button" class="btn btn-danger mb30 removePlanBtn">Delete</button>
+                                                        <?php endif; ?>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-xl-4">
                                                     <div class="my_profile_setting_input form-group">
-                                                        <label for="planBathrooms">Plan Bathrooms</label>
-                                                        <input type="text" class="form-control" id="planBathrooms" name="plan_bathrooms[]">
+                                                        <label>Plan Title</label>
+                                                        <input type="text" class="form-control" name="plan_title[]" value="<?= htmlspecialchars($plan['title']) ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-xl-4">
                                                     <div class="my_profile_setting_input form-group">
-                                                        <label for="planPrice">Plan Price</label>
-                                                        <input type="text" class="form-control" id="planPrice" name="plan_price[]">
+                                                        <label>Plan Bedrooms</label>
+                                                        <input type="text" class="form-control" name="plan_bedrooms[]" value="<?= htmlspecialchars($plan['bedrooms']) ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-xl-4">
                                                     <div class="my_profile_setting_input form-group">
-                                                        <label for="planPostfix">Price Postfix</label>
-                                                        <input type="text" class="form-control" id="planPostfix" name="plan_price_postfix[]">
+                                                        <label>Plan Bathrooms</label>
+                                                        <input type="text" class="form-control" name="plan_bathrooms[]" value="<?= htmlspecialchars($plan['bathrooms']) ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-xl-4">
                                                     <div class="my_profile_setting_input form-group">
-                                                        <label for="planSize">Plan Size</label>
-                                                        <input type="text" class="form-control" id="planSize" name="plan_size[]">
+                                                        <label>Plan Price</label>
+                                                        <input type="text" class="form-control" name="plan_price[]" value="<?= htmlspecialchars($plan['price']) ?>">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-xl-4">
                                                     <div class="my_profile_setting_input form-group">
-                                                        <label>Plan Image</label>
-                                                        <div class="avatar-upload">
-                                                            <div class="avatar-edit">
-                                                                <input type="file" id="planImage" name="plan_image_path[]" accept=".png, .jpg, .jpeg">
-                                                                <label for="planImage" id="planImagefile"></label>
-                                                            </div>
-                                                            <div class="avatar-preview">
-                                                                <div class="form-control" id="imagePreview"></div>
-                                                            </div>
-                                                        </div>
+                                                        <label>Price Postfix</label>
+                                                        <input type="text" class="form-control" name="plan_price_postfix[]" value="<?= htmlspecialchars($plan['price_postfix']) ?>">
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-12">
+                                                <div class="col-lg-6 col-xl-4">
+                                                    <div class="my_profile_setting_input form-group">
+                                                        <label>Plan Size</label>
+                                                        <input type="text" class="form-control" name="plan_size[]" value="<?= htmlspecialchars($plan['size']) ?>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="wrap-custom-file">
+                                                        <input type="file" name="plan_image_path[]" id="planImage" accept=".gif, .jpg, .jpeg, .png">
+                                                        <label for="planImage" <?php if (!empty($plan['image_path'])): ?>
+                                                            style="background-image: url('<?php echo '../../' . $plan['image_path']; ?>');"
+                                                            <?php endif; ?>>
+                                                            <span><i class="flaticon-download"></i> Upload Plan Image</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-8">
                                                     <div class="my_profile_setting_textarea mt30-991">
                                                         <label for="planDescription">Plan Description</label>
-                                                        <textarea class="form-control" id="planDescription" name="plan_description[]" rows="7"></textarea>
+                                                        <textarea class="form-control" name="plan_description[]" rows="7"><?= htmlspecialchars($plan['description']); ?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <?php endforeach; ?>
+
                                     <div class="row">
                                         <div class="col-xl-12 mt30">
                                             <div class="my_profile_setting_input">
@@ -656,10 +697,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             imageInput.files = dt.files;
             imageInput.dispatchEvent(new Event('change')); // refresh preview
         }
-
-        // Show attachment file name
-        document.getElementById('attachmentFile').addEventListener('change', function() {
-            document.getElementById('attachmentName').value = this.files[0]?.name || '';
+    </script>
+    <script>
+        document.getElementById('planImage').addEventListener('change', function(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const label = document.querySelector('label[for="planImage"]');
+                    label.style.backgroundImage = `url('${e.target.result}')`;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
         });
     </script>
     <script>
@@ -688,14 +737,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 e.target.closest('.floor-plan-block').remove();
             }
         });
-
-        document.getElementById('planImage').addEventListener('change', function() {
-            const fileName = this.files[0]?.name || '';
-            document.getElementById('imagePreview').textContent = fileName;
+    </script>
+    <script>
+        document.getElementById('attachmentFile').addEventListener('change', function() {
+            document.getElementById('attachmentName').value = this.files[0]?.name || '';
         });
     </script>
-
-
+    <script>
+        document.getElementById('planImage').addEventListener('change', function(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const label = document.querySelector('label[for="planImage"]');
+                    label.style.backgroundImage = `url('${e.target.result}')`;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -1,6 +1,13 @@
 <?php
 include("../../include/db_connect.php");
 
+session_start();
+
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
+    header("Location: ../login.php");
+    exit();
+}
+
 $user = null;
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");

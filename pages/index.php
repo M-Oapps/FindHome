@@ -703,84 +703,21 @@
         </section>
 
         <!-- Our Partners -->
-        <section id="our-partners" class="our-partners">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 offset-lg-3">
-                        <div class="main-title text-center">
-                            <h2>Our Partners</h2>
-                            <p>We only work with the best companies around the globe</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-md-4 col-lg">
-                        <div class="our_partner">
-                            <img class="img-fluid"
-                                src="https://creativelayers.net/themes/findhouse-html/images/partners/1.png"
-                                alt="1.png">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg">
-                        <div class="our_partner">
-                            <img class="img-fluid"
-                                src="https://creativelayers.net/themes/findhouse-html/images/partners/2.png"
-                                alt="2.png">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg">
-                        <div class="our_partner">
-                            <img class="img-fluid"
-                                src="https://creativelayers.net/themes/findhouse-html/images/partners/3.png"
-                                alt="3.png">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg">
-                        <div class="our_partner">
-                            <img class="img-fluid"
-                                src="https://creativelayers.net/themes/findhouse-html/images/partners/4.png"
-                                alt="4.png">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-4 col-lg">
-                        <div class="our_partner">
-                            <img class="img-fluid"
-                                src="https://creativelayers.net/themes/findhouse-html/images/partners/5.png"
-                                alt="5.png">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <?php include "../pages/component/partners.php"; ?>
 
         <!-- Start Partners -->
-        <section class="start-partners bgc-thm pt50 pb50">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="start_partner tac-smd">
-                            <h2>Become a Real Estate Agent</h2>
-                            <p>We only work with the best companies around the globe</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="parner_reg_btn text-right tac-smd">
-                            <a class="btn btn-thm2" href="#">Register Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <?php include "../pages/component/cta.php"; ?>
+
 
         <!-- Footer start  -->
-       <?php include "../include/footer.php"; ?>
-       <!--	Footer end  -->
-        
+        <?php include "../include/footer.php"; ?>
+        <!--	Footer end  -->
+
         <a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
     </div>
 
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.feature_property_slider').owlCarousel({
                 dots: true,
                 nav: false,
@@ -803,7 +740,7 @@
         });
     </script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".testimonial_grid_slider").owlCarousel({
                 items: 1,
                 dots: true,
@@ -820,4 +757,5 @@
     <script type="text/javascript" src="../Js/jquery.mmenu.all.js"></script>
     <script type="text/javascript" src="../js/bootstrap-select.min.js"></script>
 </body>
+
 </html>

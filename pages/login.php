@@ -73,27 +73,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <div class="heading">
                                     <h3 class="text-center">Login to your account</h3>
                                     <p class="text-center">Don't have an account? <a class="text-thm"
-                                            href="page-register.html">Sign Up!</a></p>
+                                            href="register.php">Sign Up!</a></p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" name="email" class="form-control" placeholder="Email Address" required>
+                                    <input type="email" name="email" class="form-control" placeholder="Email Address"
+                                        required>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                                    <input type="password" name="password" class="form-control" placeholder="Password"
+                                        required>
                                 </div>
                                 <button type="submit" class="btn btn-log btn-block btn-thm2">Login</button>
-                                <div class="divide mt40">
-                                    <span class="lf_divider">Or</span>
-                                    <hr>
-                                </div>
-                                <div class="row mt40">
-                                    <div class="col-lg">
-                                        <div>Don't have an account?</div>
-                                    </div>
-                                    <div class="col-lg">
-                                        <a class="tdu btn-fpswd float-right" href="../pages/register.php">Register</a>
-                                    </div>
-                                </div>
                             </form>
                         </div>
                     </div>
@@ -101,24 +91,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </section>
 
-        <section class="start-partners bgc-thm pt50 pb50">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="start_partner tac-smd">
-                            <h2>Become a Real Estate Agent</h2>
-                            <p>We only work with the best companies around the globe</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="parner_reg_btn text-right tac-smd">
-                            <a class="btn btn-thm2" href="#">Register Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        <!-- Start Partners -->
+        <?php include "../pages/component/cta.php"; ?>
 
         <!-- Footer start  -->
         <?php include "../include/footer.php"; ?>

@@ -2,7 +2,7 @@
 <html dir="ltr" lang="en">
 
 <head>
-<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -315,27 +315,12 @@
             </div>
         </section>
 
-        <section class="start-partners bgc-thm pt50 pb50">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="start_partner tac-smd">
-                            <h2>Become a Real Estate Agent</h2>
-                            <p>We only work with the best companies around the globe</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="parner_reg_btn text-right tac-smd">
-                            <a class="btn btn-thm2" href="#">Register Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- Start Partners -->
+        <?php include "../pages/component/cta.php"; ?>
 
-         <!-- Footer start  -->
-       <?php include "../include/footer.php"; ?>
-       <!--	Footer end  -->
+        <!-- Footer start  -->
+        <?php include "../include/footer.php"; ?>
+        <!--	Footer end  -->
 
         <a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
     </div>
@@ -345,4 +330,5 @@
     <script type="text/javascript" src="../Js/jquery.mmenu.all.js"></script>
     <script type="text/javascript" src="../js/bootstrap-select.min.js"></script>
 </body>
+
 </html>

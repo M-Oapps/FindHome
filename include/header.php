@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php if (session_status() == PHP_SESSION_NONE) { session_start(); } ?>
+=======
+<?php session_start(); ?>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 
 <!-- Main Header Nav -->
 <header class="header-nav menu_style_home_one style2 navbar-scrolltofixed stricky main-menu scroll-to-fixed-fixed slideIn animated">

@@ -1,7 +1,11 @@
 <?php
+<<<<<<< HEAD
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+=======
+session_start();
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 include("../../include/db_connect.php");
 
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {

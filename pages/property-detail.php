@@ -26,16 +26,24 @@
         <?php include "../include/header.php"; ?>
         <!--	Header end  -->
 
+<<<<<<< HEAD
         <div class="single_page_listing_style p0 md-mt0">
+=======
+        <div class="single_page_listing_style p0 mt85 md-mt0">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
             <div class="container-fluid p0">
                 <div class="row">
                     <div class="col-sm-6 col-lg-6 p0">
                         <div class="row m0">
                             <div class="col-lg-12 p0">
                                 <div class="spls_style_one pr1 1px">
+<<<<<<< HEAD
                                     <img class="img-fluid w100"
                                         src="https://creativelayers.net/themes/findhouse-html/images/property/ls1.jpg"
                                         alt="ls1.jpg">
+=======
+                                    <img class="img-fluid w100" src="https://creativelayers.net/themes/findhouse-html/images/property/ls1.jpg" alt="ls1.jpg">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                 </div>
                             </div>
                         </div>
@@ -44,38 +52,58 @@
                         <div class="row m0">
                             <div class="col-sm-6 col-lg-6 p0">
                                 <div class="spls_style_one">
+<<<<<<< HEAD
                                     <a class="popup-img"
                                         href="https://creativelayers.net/themes/findhouse-html/images/property/ls2.jpg"><img
                                             class="img-fluid w100"
                                             src="https://creativelayers.net/themes/findhouse-html/images/property/ls2.jpg"
                                             alt="ls2.jpg"></a>
+=======
+                                    <a class="popup-img" href="https://creativelayers.net/themes/findhouse-html/images/property/ls2.jpg"><img class="img-fluid w100"
+                                            src="https://creativelayers.net/themes/findhouse-html/images/property/ls2.jpg" alt="ls2.jpg"></a>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-6 p0">
                                 <div class="spls_style_one">
+<<<<<<< HEAD
                                     <a class="popup-img"
                                         href="https://creativelayers.net/themes/findhouse-html/images/property/ls3.jpg"><img
                                             class="img-fluid w100"
                                             src="https://creativelayers.net/themes/findhouse-html/images/property/ls3.jpg"
                                             alt="ls3.jpg"></a>
+=======
+                                    <a class="popup-img" href="https://creativelayers.net/themes/findhouse-html/images/property/ls3.jpg"><img class="img-fluid w100"
+                                            src="https://creativelayers.net/themes/findhouse-html/images/property/ls3.jpg" alt="ls3.jpg"></a>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-6 p0">
                                 <div class="spls_style_one">
+<<<<<<< HEAD
                                     <a class="popup-img"
                                         href="https://creativelayers.net/themes/findhouse-html/images/property/ls4.jpg"><img
                                             class="img-fluid w100"
                                             src="https://creativelayers.net/themes/findhouse-html/images/property/ls4.jpg"
                                             alt="ls4.jpg"></a>
+=======
+                                    <a class="popup-img" href="https://creativelayers.net/themes/findhouse-html/images/property/ls4.jpg"><img class="img-fluid w100"
+                                            src="https://creativelayers.net/themes/findhouse-html/images/property/ls4.jpg" alt="ls4.jpg"></a>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                 </div>
                             </div>
                             <div class="col-sm-6 col-lg-6 p0">
                                 <div class="spls_style_one">
+<<<<<<< HEAD
                                     <a class="popup-img"
                                         href="https://creativelayers.net/themes/findhouse-html/images/property/ls5.jpg"><img
                                             class="img-fluid w100"
                                             src="https://creativelayers.net/themes/findhouse-html/images/property/ls5.jpg"
                                             alt="ls5.jpg"></a>
+=======
+                                    <a class="popup-img" href="https://creativelayers.net/themes/findhouse-html/images/property/ls5.jpg"><img class="img-fluid w100"
+                                            src="https://creativelayers.net/themes/findhouse-html/images/property/ls5.jpg" alt="ls5.jpg"></a>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                 </div>
                             </div>
                         </div>
@@ -89,8 +117,13 @@
                 <div class="row listing_single_row">
                     <div class="col-sm-6 col-lg-7 col-xl-8">
                         <div class="single_property_title">
+<<<<<<< HEAD
                             <a href="https://creativelayers.net/themes/findhouse-html/images/property/ls1.jpg"
                                 class="upload_btn popup-img"><span class="flaticon-photo-camera"></span> View Photos</a>
+=======
+                            <a href="https://creativelayers.net/themes/findhouse-html/images/property/ls1.jpg" class="upload_btn popup-img"><span
+                                    class="flaticon-photo-camera"></span> View Photos</a>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-5 col-xl-4">
@@ -1256,8 +1289,12 @@
                                 <div class="item">
                                     <div class="feat_property home7 agent">
                                         <div class="thumb">
+<<<<<<< HEAD
                                             <img class="img-whp"
                                                 src="https://creativelayers.net/themes/findhouse-html/images/property/fp4.jpg"
+=======
+                                            <img class="img-whp" src="https://creativelayers.net/themes/findhouse-html/images/property/fp4.jpg"
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 alt="fp4.jpg">
                                             <div class="thmb_cntnt">
                                                 <ul class="tag mb0">
@@ -1275,8 +1312,12 @@
                                 <div class="item">
                                     <div class="feat_property home7 agent">
                                         <div class="thumb">
+<<<<<<< HEAD
                                             <img class="img-whp"
                                                 src="https://creativelayers.net/themes/findhouse-html/images/property/fp5.jpg"
+=======
+                                            <img class="img-whp" src="https://creativelayers.net/themes/findhouse-html/images/property/fp5.jpg"
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 alt="fp5.jpg">
                                             <div class="thmb_cntnt">
                                                 <ul class="tag mb0">
@@ -1294,8 +1335,12 @@
                                 <div class="item">
                                     <div class="feat_property home7 agent">
                                         <div class="thumb">
+<<<<<<< HEAD
                                             <img class="img-whp"
                                                 src="https://creativelayers.net/themes/findhouse-html/images/property/fp1.jpg"
+=======
+                                            <img class="img-whp" src="https://creativelayers.net/themes/findhouse-html/images/property/fp1.jpg"
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 alt="fp1.jpg">
                                             <div class="thmb_cntnt">
                                                 <ul class="tag mb0">
@@ -1313,8 +1358,12 @@
                                 <div class="item">
                                     <div class="feat_property home7 agent">
                                         <div class="thumb">
+<<<<<<< HEAD
                                             <img class="img-whp"
                                                 src="https://creativelayers.net/themes/findhouse-html/images/property/fp2.jpg"
+=======
+                                            <img class="img-whp" src="https://creativelayers.net/themes/findhouse-html/images/property/fp2.jpg"
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 alt="fp2.jpg">
                                             <div class="thmb_cntnt">
                                                 <ul class="tag mb0">
@@ -1332,8 +1381,12 @@
                                 <div class="item">
                                     <div class="feat_property home7 agent">
                                         <div class="thumb">
+<<<<<<< HEAD
                                             <img class="img-whp"
                                                 src="https://creativelayers.net/themes/findhouse-html/images/property/fp3.jpg"
+=======
+                                            <img class="img-whp" src="https://creativelayers.net/themes/findhouse-html/images/property/fp3.jpg"
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 alt="fp3.jpg">
                                             <div class="thmb_cntnt">
                                                 <ul class="tag mb0">
@@ -1426,7 +1479,11 @@
         <a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
     </div>
     <script>
+<<<<<<< HEAD
         $(document).ready(function () {
+=======
+        $(document).ready(function() {
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
             $(".sidebar_feature_property_slider").owlCarousel({
                 items: 1,
                 dots: true,

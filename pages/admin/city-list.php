@@ -1,15 +1,23 @@
 <?php
 include("../../include/db_connect.php");
+<<<<<<< HEAD
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+=======
+session_start();
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
     header("Location: ../login.php");
     exit();
 }
 
 $limit = 5;
+<<<<<<< HEAD
 $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+=======
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 $start = ($page - 1) * $limit;
 
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
@@ -119,16 +127,24 @@ if (isset($_GET['delete_id'])) {
                                             <div class="candidate_revew_search_box course fn-520">
                                                 <form method="GET" class="form-inline my-2">
                                                     <input class="form-control mr-sm-2" type="search" name="search"
+<<<<<<< HEAD
                                                         value="<?= htmlspecialchars($search ?? '') ?>"
                                                         placeholder="Search" aria-label="Search">
+=======
+                                                        value="<?= htmlspecialchars($search ?? '') ?>" placeholder="Search" aria-label="Search">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                     <button class="btn my-2 my-sm-0" type="submit"><span
                                                             class="flaticon-magnifying-glass"></span></button>
                                                 </form>
                                             </div>
                                         </li>
                                         <li class="list-inline-item view_add_list" title="Add">
+<<<<<<< HEAD
                                             <a href="../../pages/admin/city-add.php"><span
                                                     class="flaticon-plus"></span></a>
+=======
+                                            <a href="../../pages/admin/city-add.php"><span class="flaticon-plus"></span></a>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                         </li>
                                     </ul>
                                 </div>
@@ -149,7 +165,11 @@ if (isset($_GET['delete_id'])) {
                                                 <tbody>
                                                     <?php
                                                     foreach ($cities as $city):
+<<<<<<< HEAD
                                                         ?>
+=======
+                                                    ?>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         <tr>
                                                             <th scope="row">
                                                                 <div class="feat_property list favorite_page style2">
@@ -165,6 +185,7 @@ if (isset($_GET['delete_id'])) {
                                                             <td>
                                                                 <ul class="view_edit_delete_list mb0">
                                                                     <li class="list-inline-item" title="Edit">
+<<<<<<< HEAD
                                                                         <a href="city-edit.php?id=<?= $city['id'] ?>"><span
                                                                                 class="flaticon-edit"></span></a>
                                                                     </li>
@@ -172,6 +193,12 @@ if (isset($_GET['delete_id'])) {
                                                                         title="Delete">
                                                                         <a href="city-list.php?delete_id=<?= $city['id']; ?>"
                                                                             onclick="return confirmDelete();">
+=======
+                                                                        <a href="city-edit.php?id=<?= $city['id'] ?>"><span class="flaticon-edit"></span></a>
+                                                                    </li>
+                                                                    <li class="list-inline-item" data-toggle="tooltip" title="Delete">
+                                                                        <a href="city-list.php?delete_id=<?= $city['id']; ?>" onclick="return confirmDelete();">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                                             <span class="flaticon-garbage"></span>
                                                                         </a>
                                                                     </li>
@@ -186,28 +213,44 @@ if (isset($_GET['delete_id'])) {
                                             <ul class="page_navigation">
                                                 <?php if ($page > 1): ?>
                                                     <li class="page-item">
+<<<<<<< HEAD
                                                         <a class="page-link"
                                                             href="?page=<?= $page - 1 ?>&search=<?= urlencode($search) ?>"><span
                                                                 class="flaticon-left-arrow"></span> Prev</a>
+=======
+                                                        <a class="page-link" href="?page=<?= $page - 1 ?>&search=<?= urlencode($search) ?>"><span class="flaticon-left-arrow"></span> Prev</a>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                     </li>
                                                 <?php endif; ?>
 
                                                 <?php for ($i = 1; $i <= $total_pages; $i++): ?>
                                                     <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+<<<<<<< HEAD
                                                         <a class="page-link"
                                                             href="?page=<?= $i ?>&search=<?= urlencode($search) ?>"><?= $i ?></a>
+=======
+                                                        <a class="page-link" href="?page=<?= $i ?>&search=<?= urlencode($search) ?>"><?= $i ?></a>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                     </li>
                                                 <?php endfor; ?>
 
                                                 <?php if ($page < $total_pages): ?>
                                                     <li class="page-item">
+<<<<<<< HEAD
                                                         <a class="page-link"
                                                             href="?page=<?= $page + 1 ?>&search=<?= urlencode($search) ?>"><span
                                                                 class="flaticon-right-arrow"></span></a>
+=======
+                                                        <a class="page-link" href="?page=<?= $page + 1 ?>&search=<?= urlencode($search) ?>"><span class="flaticon-right-arrow"></span></a>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                     </li>
                                                 <?php endif; ?>
                                             </ul>
                                         </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                     </div>
                                 </div>
                             </div>

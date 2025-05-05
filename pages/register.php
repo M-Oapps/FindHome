@@ -1,8 +1,12 @@
 <?php
+<<<<<<< HEAD
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+=======
+session_start();
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 include("../include/db_connect.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -84,7 +88,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="heading">
                                 <h3 class="text-center">Register to start learning</h3>
                                 <p class="text-center">Have an account? <a class="text-thm"
+<<<<<<< HEAD
                                         href="login.php">Login</a></p>
+=======
+                                        href="../pages/login.php">Login</a></p>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                             </div>
                             <div class="details">
                                 <form method="POST" action="register.php">
@@ -105,6 +113,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             placeholder="Confirm Password" required>
                                     </div>
                                     <button type="submit" class="btn btn-log btn-block btn-thm2">Register</button>
+<<<<<<< HEAD
+=======
+                                    <div class="divide mt40">
+                                        <span class="lf_divider">Or</span>
+                                        <hr>
+                                    </div>
+                                    <div class="row mt40">
+                                        <div class="col-lg-8">
+                                            <div>Already have an account?</div>
+                                        </div>
+                                        <div class="col-lg">
+                                            <a class="tdu btn-fpswd float-right" href="../pages/login.php">Login</a>
+                                        </div>
+                                    </div>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                 </form>
                             </div>
                         </div>

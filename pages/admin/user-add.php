@@ -1,8 +1,12 @@
 <?php
 include("../../include/db_connect.php");
+<<<<<<< HEAD
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+=======
+session_start();
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
     header("Location: ../login.php");
@@ -113,92 +117,144 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleInput1">Username</label>
+<<<<<<< HEAD
                                                             <input type="text" name="username" class="form-control"
                                                                 placeholder="Username" required>
+=======
+                                                            <input type="text" name="username" class="form-control" placeholder="Username" require>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleEmail">Email</label>
+<<<<<<< HEAD
                                                             <input type="email" class="form-control" name="email"
                                                                 placeholder="Email" required>
+=======
+                                                            <input type="email" class="form-control" name="email" placeholder="Email" require>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleInput3">First Name</label>
+<<<<<<< HEAD
                                                             <input type="text" class="form-control" name="first_name"
                                                                 placeholder="First Name">
+=======
+                                                            <input type="text" class="form-control" name="first_name" placeholder="First Name">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleInput4">Last Name</label>
+<<<<<<< HEAD
                                                             <input type="text" class="form-control" name="last_name"
                                                                 placeholder="Last Name">
+=======
+                                                            <input type="text" class="form-control" name="last_name" placeholder="Last Name">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleInput5">Position</label>
+<<<<<<< HEAD
                                                             <input type="text" class="form-control" name="position"
                                                                 placeholder="Position">
+=======
+                                                            <input type="text" class="form-control" name="position" placeholder="Position">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleInput6">License</label>
+<<<<<<< HEAD
                                                             <input type="text" class="form-control" name="license"
                                                                 placeholder="License">
+=======
+                                                            <input type="text" class="form-control" name="license" placeholder="License">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleInput7">Tax Number</label>
+<<<<<<< HEAD
                                                             <input type="text" class="form-control" name="tax_number"
                                                                 placeholder="Tax Number">
+=======
+                                                            <input type="text" class="form-control" name="tax_number" placeholder="Tax Number">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleInput8">Phone</label>
+<<<<<<< HEAD
                                                             <input type="tel" class="form-control" name="phone"
                                                                 placeholder="Phone">
+=======
+                                                            <input type="tel" class="form-control" name="phone" placeholder="Phone">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleInput9">Fax Number</label>
+<<<<<<< HEAD
                                                             <input type="text" class="form-control" name="fax_number"
                                                                 placeholder="Fax Number">
+=======
+                                                            <input type="text" class="form-control" name="fax_number" placeholder="Fax Number">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleInput10">Mobile</label>
+<<<<<<< HEAD
                                                             <input type="tel" class="form-control" name="mobile"
                                                                 placeholder="Mobile">
+=======
+                                                            <input type="tel" class="form-control" name="mobile" placeholder="Mobile">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleInput11">Language</label>
+<<<<<<< HEAD
                                                             <input type="text" class="form-control" name="language"
                                                                 placeholder="Language">
+=======
+                                                            <input type="text" class="form-control" name="language" placeholder="Language">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleInput12">Company Name</label>
+<<<<<<< HEAD
                                                             <input type="text" class="form-control" name="company_name"
                                                                 placeholder="Company Name">
+=======
+                                                            <input type="text" class="form-control" name="company_name" placeholder="Company Name">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-12">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleInput13">Address</label>
+<<<<<<< HEAD
                                                             <input type="text" class="form-control" name="address"
                                                                 placeholder="Address">
+=======
+                                                            <input type="text" class="form-control" name="address" placeholder="Address">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-12">
@@ -211,81 +267,127 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                     <div class="col-xl-12">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleWebsite">Website</label>
+<<<<<<< HEAD
                                                             <input type="url" class="form-control" name="website"
                                                                 placeholder="Website">
+=======
+                                                            <input type="url" class="form-control" name="website" placeholder="Website">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleSkype">Skype</label>
+<<<<<<< HEAD
                                                             <input type="text" class="form-control" name="skype"
                                                                 placeholder="Skype Url">
+=======
+                                                            <input type="text" class="form-control" name="skype" placeholder="Skype Url">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleFaceBook">Facebook</label>
+<<<<<<< HEAD
                                                             <input type="url" class="form-control" name="facebook"
                                                                 placeholder="Facebook Url">
+=======
+                                                            <input type="url" class="form-control" name="facebook" placeholder="Facebook Url">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleTwitter">Twitter</label>
+<<<<<<< HEAD
                                                             <input type="url" class="form-control" name="twitter"
                                                                 placeholder="Twitter Url">
+=======
+                                                            <input type="url" class="form-control" name="twitter" placeholder="Twitter Url">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleLinkedin">Linkedin</label>
+<<<<<<< HEAD
                                                             <input type="url" class="form-control" name="linkedin"
                                                                 placeholder="Linkedin Url">
+=======
+                                                            <input type="url" class="form-control" name="linkedin" placeholder="Linkedin Url">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleInstagram">Instagram</label>
+<<<<<<< HEAD
                                                             <input type="url" class="form-control" name="instagram"
                                                                 placeholder="Instagram Url">
+=======
+                                                            <input type="url" class="form-control" name="instagram" placeholder="Instagram Url">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleGooglePlus">Google Plus</label>
+<<<<<<< HEAD
                                                             <input type="url" class="form-control" name="google_plus"
                                                                 placeholder="Google Plus Url">
+=======
+                                                            <input type="url" class="form-control" name="google_plus" placeholder="Google Plus Url">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleYoutube">Youtube</label>
+<<<<<<< HEAD
                                                             <input type="url" class="form-control" name="youtube"
                                                                 placeholder="Youtube Url">
+=======
+                                                            <input type="url" class="form-control" name="youtube" placeholder="Youtube Url">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExamplePinterest">Pinterest</label>
+<<<<<<< HEAD
                                                             <input type="url" class="form-control" name="pinterest"
                                                                 placeholder="Pinterest Url">
+=======
+                                                            <input type="url" class="form-control" name="pinterest" placeholder="Pinterest Url">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-xl-4">
                                                         <div class="my_profile_setting_input form-group">
                                                             <label for="formGroupExampleVimeo">Vimeo</label>
+<<<<<<< HEAD
                                                             <input type="url" class="form-control" name="vimeo"
                                                                 placeholder="Vimeo Url">
+=======
+                                                            <input type="url" class="form-control" name="vimeo" placeholder="Vimeo Url">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <div class="wrap-custom-file">
+<<<<<<< HEAD
                                                             <input type="file" name="image" id="image"
                                                                 accept=".gif, .jpg, .jpeg, .png">
                                                             <label for="image">
                                                                 <span><i class="flaticon-download"></i> Upload Photo
                                                                 </span>
+=======
+                                                            <input type="file" name="image" id="image" accept=".gif, .jpg, .jpeg, .png">
+                                                            <label for="image">
+                                                                <span><i class="flaticon-download"></i> Upload Photo </span>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                             </label>
                                                         </div>
                                                         <p>*minimum 260px x 260px</p>
@@ -323,11 +425,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script type="text/javascript" src="../Js/jquery.mmenu.all.js"></script>
     <script type="text/javascript" src="../js/bootstrap-select.min.js"></script>
     <script>
+<<<<<<< HEAD
         document.getElementById('image').addEventListener('change', function (event) {
             const input = event.target;
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
+=======
+        document.getElementById('image').addEventListener('change', function(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                     const label = document.querySelector('label[for="image"]');
                     label.style.backgroundImage = `url('${e.target.result}')`;
                 };

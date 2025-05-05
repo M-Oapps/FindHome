@@ -15,7 +15,13 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
 
+<<<<<<< HEAD
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
+=======
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modal-video/2.4.1/css/modal-video.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modal-video/2.4.1/js/jquery-modal-video.min.js"></script>
+
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 
     <title>About Us Page</title>
 
@@ -108,11 +114,18 @@
                     </div>
                     <div class="col-lg-4 col-xl-5">
                         <div class="about_thumb">
+<<<<<<< HEAD
                             <img class="img-fluid w100" src="https://creativelayers.net/themes/findhouse-html/images/about/1.jpg" alt="1.jpg">
                             <!-- FancyBox link -->
                             <a class="popup-iframe popup-youtube color-white" href="https://www.youtube.com/watch?v=R7xbhKIiw4Y" data-fancybox="video">
                                 <i class="flaticon-play"></i>
                             </a>
+=======
+                            <img class="img-fluid w100"
+                                src="https://creativelayers.net/themes/findhouse-html/images/about/1.jpg" alt="1.jpg">
+                            <a class="popup-iframe popup-youtube color-white"
+                                href="https://www.youtube.com/watch?v=R7xbhKIiw4Y"><i class="flaticon-play"></i></a>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                         </div>
                     </div>
                 </div>
@@ -666,7 +679,11 @@
         <a class="scrollToHome" href="#"><i class="flaticon-arrows"></i></a>
     </div>
     <script>
+<<<<<<< HEAD
         $(document).ready(function() {
+=======
+        $(document).ready(function () {
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
             $('.team_slider').owlCarousel({
                 loop: false,
                 margin: 30,
@@ -698,7 +715,11 @@
         });
     </script>
     <script>
+<<<<<<< HEAD
         $(document).ready(function() {
+=======
+        $(document).ready(function () {
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
             $(".testimonial_grid_slider").owlCarousel({
                 items: 1,
                 dots: true,
@@ -710,6 +731,7 @@
         });
     </script>
     <script>
+<<<<<<< HEAD
         $(document).ready(function() {
             $('[data-fancybox="video"]').fancybox({
                 // Custom settings (optional)
@@ -717,6 +739,10 @@
                     'close'
                 ]
             });
+=======
+        $(function () {
+            $(".popup-youtube").modalVideo({channel: 'youtube'});
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
         });
     </script>
 
@@ -725,10 +751,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../Js/jquery.mmenu.all.js"></script>
     <script type="text/javascript" src="../js/bootstrap-select.min.js"></script>
+<<<<<<< HEAD
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
 
+=======
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 </body>
 
 </html>

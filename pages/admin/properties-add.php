@@ -1,8 +1,13 @@
 <?php
 include("../../include/db_connect.php");
+<<<<<<< HEAD
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+=======
+session_start();
+
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
     header("Location: ../login.php");
     exit();
@@ -18,13 +23,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             address, state, city, neighborhood, zip_code, latitude, longitude,
             area_size, size_prefix, land_area, land_area_postfix, bedrooms,
             bathrooms, garages, garage_size, year_built, video_url, virtual_tour_url,
+<<<<<<< HEAD
             is_featured, attachment_url, approval_status, sale_status 
+=======
+            is_featured, attachment_url
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
         ) VALUES (
             :user_id, :title, :description, :type, :status, :rooms, :price, :area,
             :address, :state, :city, :neighborhood, :zip_code, :latitude, :longitude,
             :area_size, :size_prefix, :land_area, :land_area_postfix, :bedrooms,
             :bathrooms, :garages, :garage_size, :year_built, :video_url, :virtual_tour_url,
+<<<<<<< HEAD
             :is_featured, :attachment_url, :approval_status, :sale_status 
+=======
+            :is_featured, :attachment_url
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
         )");
 
         $stmt->execute([
@@ -55,9 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':video_url' => $_POST['video_url'],
             ':virtual_tour_url' => $_POST['virtual_tour'],
             ':is_featured' => isset($_POST['is_featured']) ? 1 : 0,
+<<<<<<< HEAD
             ':attachment_url' => '',
             ':approval_status' => $_POST['approval_status'],
             ':sale_status' => $_POST['sale_status'],
+=======
+            ':attachment_url' => '' // placeholder
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
         ]);
 
         $property_id = $conn->lastInsertId();
@@ -232,22 +249,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <h4 class="mb30">Create Listing</h4>
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="propertyTitle">Property Title</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="propertyTitle"
                                                         name="title">
+=======
+                                                    <input type="text" class="form-control" id="propertyTitle" name="title">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12">
                                                 <div class="my_profile_setting_textarea">
                                                     <label for="propertyDescription">Description</label>
+<<<<<<< HEAD
                                                     <textarea class="form-control" id="propertyDescription" rows="7"
                                                         name="description"></textarea>
+=======
+                                                    <textarea class="form-control" id="propertyDescription" rows="7" name="description"></textarea>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-4 col-xl-4">
                                                 <div class="my_profile_setting_input ui_kit_select_search form-group">
                                                     <label>Type</label>
+<<<<<<< HEAD
                                                     <select class="selectpicker" data-live-search="true"
                                                         data-width="100%" name="type">
                                                         <option value="">Select Type</option>
@@ -255,6 +281,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                             <option value="<?= htmlspecialchars($type['name']) ?>">
                                                                 <?= htmlspecialchars($type['name']) ?>
                                                             </option>
+=======
+                                                    <select class="selectpicker" data-live-search="true" data-width="100%" name="type">
+                                                        <option value="">Select Type</option>
+                                                        <?php foreach ($types as $type): ?>
+                                                            <option value="<?= htmlspecialchars($type['name']) ?>"><?= htmlspecialchars($type['name']) ?></option>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         <?php endforeach; ?>
                                                     </select>
                                                 </div>
@@ -263,7 +295,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <div class="col-lg-4 col-xl-4">
                                                 <div class="my_profile_setting_input ui_kit_select_search form-group">
                                                     <label>Status</label>
+<<<<<<< HEAD
                                                     <select class="selectpicker" data-width="100%" name="status">
+=======
+                                                    <select class="selectpicker" data-live-search="true" data-width="100%" name="status">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         <option value="">Select Status</option>
                                                         <option value="Rent">Rent</option>
                                                         <option value="Sale">Sale</option>
@@ -274,8 +310,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <div class="col-lg-4 col-xl-4">
                                                 <div class="my_profile_setting_input ui_kit_select_search form-group">
                                                     <label>Rooms</label>
+<<<<<<< HEAD
                                                     <select class="selectpicker" data-live-search="true"
                                                         data-width="100%" name="rooms">
+=======
+                                                    <select class="selectpicker" data-live-search="true" data-width="100%" name="rooms">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         <option value="">Select Rooms</option>
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
@@ -290,16 +330,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <div class="col-lg-6 col-xl-6">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="formGroupExamplePrice">Price</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="formGroupExamplePrice"
                                                         name="price">
+=======
+                                                    <input type="text" class="form-control" id="formGroupExamplePrice" name="price">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-6 col-xl-6">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="formGroupExampleArea">Area</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="formGroupExampleArea"
                                                         name="area">
+=======
+                                                    <input type="text" class="form-control" id="formGroupExampleArea" name="area">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                         </div>
@@ -310,24 +358,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <h4 class="mb30">Location</h4>
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="propertyAddress">Address</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="propertyAddress"
                                                         name="address">
+=======
+                                                    <input type="text" class="form-control" id="propertyAddress" name="address">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-4 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="propertyState">County / State</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="propertyState"
                                                         name="state">
+=======
+                                                    <input type="text" class="form-control" id="propertyState" name="state">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-4 col-xl-4">
                                                 <div class="my_profile_setting_input ui_kit_select_search form-group">
                                                     <label>City</label>
+<<<<<<< HEAD
                                                     <select class="selectpicker" data-live-search="true"
                                                         data-width="100%" name="city">
+=======
+                                                    <select class="selectpicker" data-live-search="true" data-width="100%" name="city">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         <option value="">Select City</option>
                                                         <?php foreach ($cities as $city): ?>
                                                             <option value="<?= htmlspecialchars($city['name']) ?>">
@@ -341,8 +401,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <div class="col-lg-4 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="neighborHood">Neighborhood</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="neighborHood"
                                                         name="neighborhood">
+=======
+                                                    <input type="text" class="form-control" id="neighborHood" name="neighborhood">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
 
@@ -356,16 +420,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <div class="col-lg-4 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="googleMapLat">Latitude (for Google Maps)</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="googleMapLat"
                                                         name="latitude">
+=======
+                                                    <input type="text" class="form-control" id="googleMapLat" name="latitude">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-4 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="googleMapLong">Longitude (for Google Maps)</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="googleMapLong"
                                                         name="longitude">
+=======
+                                                    <input type="text" class="form-control" id="googleMapLong" name="longitude">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                         </div>
@@ -378,41 +450,62 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <div class="col-lg-6 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="propertyASize">Area Size</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="propertyASize"
                                                         name="area_size">
+=======
+                                                    <input type="text" class="form-control" id="propertyASize" name="area_size">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="sizePrefix">Size Prefix</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="sizePrefix"
                                                         name="size_prefix">
+=======
+                                                    <input type="text" class="form-control" id="sizePrefix" name="size_prefix">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="landArea">Land Area</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="landArea"
                                                         name="land_area">
+=======
+                                                    <input type="text" class="form-control" id="landArea" name="land_area">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="LASPostfix">Land Area Size Postfix</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="LASPostfix"
                                                         name="land_area_postfix">
+=======
+                                                    <input type="text" class="form-control" id="LASPostfix" name="land_area_postfix">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="bedRooms">Bedrooms</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="bedRooms"
                                                         name="bedrooms">
+=======
+                                                    <input type="text" class="form-control" id="bedRooms" name="bedrooms">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="bathRooms">Bathrooms</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="bathRooms"
                                                         name="bathrooms">
                                                 </div>
@@ -427,32 +520,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <option value="No">No</option>
                                                         <option value="Other">Other</option>
                                                     </select>
+=======
+                                                    <input type="text" class="form-control" id="bathRooms" name="bathrooms">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4">
+                                                <div class="my_profile_setting_input form-group">
+                                                    <label for="garages">Garages</label>
+                                                    <input type="text" class="form-control" id="garages" name="garages">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="garagesSize">Garages Size</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="garagesSize"
                                                         name="garage_size">
+=======
+                                                    <input type="text" class="form-control" id="garagesSize" name="garage_size">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="yearBuild">Year Built</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="yearBuild"
                                                         name="year_built">
+=======
+                                                    <input type="text" class="form-control" id="yearBuild" name="year_built">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="videoUrl">Video URL</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="videoUrl"
                                                         name="video_url">
+=======
+                                                    <input type="text" class="form-control" id="videoUrl" name="video_url">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-xl-4">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="virtualTour">360° Virtual Tour</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" id="virtualTour"
                                                         name="virtual_tour">
                                                 </div>
@@ -464,6 +579,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         name="is_featured" value="1">
                                                     <label class="custom-control-label" for="isFeatured">Is
                                                         Featured?</label>
+=======
+                                                    <input type="text" class="form-control" id="virtualTour" name="virtual_tour">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6 col-xl-4">
+                                                <div class="custom-control custom-checkbox ui_kit_checkbox selectable-list" style="margin-top: 40px;">
+                                                    <input type="checkbox" class="custom-control-input" id="isFeatured" name="is_featured" value="1">
+                                                    <label class="custom-control-label" for="isFeatured">Is Featured?</label>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">
@@ -490,12 +614,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             ];
                                             $i = 1;
                                             foreach (array_chunk($amenities, 5) as $chunk):
+<<<<<<< HEAD
                                                 ?>
+=======
+                                            ?>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 <div class="col-sm-4 col-md-4 col-lg-4">
                                                     <ul class="ui_kit_checkbox selectable-list">
                                                         <?php foreach ($chunk as $label): ?>
                                                             <li>
                                                                 <div class="custom-control custom-checkbox">
+<<<<<<< HEAD
                                                                     <input type="checkbox" class="custom-control-input"
                                                                         id="customCheck<?= $i ?>" name="amenities[]"
                                                                         value="<?= htmlspecialchars($label) ?>">
@@ -504,10 +633,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                                 </div>
                                                             </li>
                                                             <?php $i++;
+=======
+                                                                    <input type="checkbox" class="custom-control-input" id="customCheck<?= $i ?>" name="amenities[]" value="<?= htmlspecialchars($label) ?>">
+                                                                    <label class="custom-control-label" for="customCheck<?= $i ?>"><?= $label ?></label>
+                                                                </div>
+                                                            </li>
+                                                        <?php $i++;
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         endforeach; ?>
                                                     </ul>
                                                 </div>
                                             <?php endforeach; ?>
+<<<<<<< HEAD
 
                                             <div class="col-lg-6 col-xl-6">
                                                 <div class="my_profile_setting_input ui_kit_select_search form-group">
@@ -533,6 +670,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 </div>
                                             </div>
 
+=======
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                         </div>
                                     </div>
                                     <div class="my_dashboard_review mt30">
@@ -545,8 +684,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             </div>
                                             <div class="col-lg-12">
                                                 <div class="portfolio_upload">
+<<<<<<< HEAD
                                                     <input type="file" name="images[]" id="imageUploadInput" multiple
                                                         accept="image/*">
+=======
+                                                    <input type="file" name="images[]" id="imageUploadInput" multiple accept="image/*">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                     <div class="icon"><span class="flaticon-download"></span></div>
                                                     <p>Drag and drop images here</p>
                                                 </div>
@@ -555,11 +698,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <div class="resume_uploader mb30">
                                                     <h3>Attachments</h3>
                                                     <div class="form-inline d-flex flex-wrap wrap">
+<<<<<<< HEAD
                                                         <input class="upload-path form-control w-75" readonly
                                                             id="attachmentName">
                                                         <label class="upload">
                                                             <input type="file" name="attachment" id="attachmentFile">
                                                             Select Attachment
+=======
+                                                        <input class="upload-path form-control w-75" readonly id="attachmentName">
+                                                        <label class="upload">
+                                                            <input type="file" name="attachment" id="attachmentFile"> Select Attachment
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </label>
                                                     </div>
                                                 </div>
@@ -572,67 +721,105 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <div class="col-lg-12 d-flex flex-wrap center justify-content-between">
                                                     <h4 class="mb30">Floor Plans</h4>
                                                     <div class="plan-header-actions">
+<<<<<<< HEAD
                                                         <button type="button" class="btn admore_btn mb30"
                                                             id="addPlanBtn">Add More</button>
+=======
+                                                        <button type="button" class="btn admore_btn mb30" id="addPlanBtn">Add More</button>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-xl-4">
                                                     <div class="my_profile_setting_input form-group">
                                                         <label for="planTitle">Plan Title</label>
+<<<<<<< HEAD
                                                         <input type="text" class="form-control" id="planTitle"
                                                             name="plan_title[]">
+=======
+                                                        <input type="text" class="form-control" id="planTitle" name="plan_title[]">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-xl-4">
                                                     <div class="my_profile_setting_input form-group">
                                                         <label for="planBedrooms">Plan Bedrooms</label>
+<<<<<<< HEAD
                                                         <input type="text" class="form-control" id="planBedrooms"
                                                             name="plan_bedrooms[]">
+=======
+                                                        <input type="text" class="form-control" id="planBedrooms" name="plan_bedrooms[]">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-xl-4">
                                                     <div class="my_profile_setting_input form-group">
                                                         <label for="planBathrooms">Plan Bathrooms</label>
+<<<<<<< HEAD
                                                         <input type="text" class="form-control" id="planBathrooms"
                                                             name="plan_bathrooms[]">
+=======
+                                                        <input type="text" class="form-control" id="planBathrooms" name="plan_bathrooms[]">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-xl-4">
                                                     <div class="my_profile_setting_input form-group">
                                                         <label for="planPrice">Plan Price</label>
+<<<<<<< HEAD
                                                         <input type="text" class="form-control" id="planPrice"
                                                             name="plan_price[]">
+=======
+                                                        <input type="text" class="form-control" id="planPrice" name="plan_price[]">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-xl-4">
                                                     <div class="my_profile_setting_input form-group">
                                                         <label for="planPostfix">Price Postfix</label>
+<<<<<<< HEAD
                                                         <input type="text" class="form-control" id="planPostfix"
                                                             name="plan_price_postfix[]">
+=======
+                                                        <input type="text" class="form-control" id="planPostfix" name="plan_price_postfix[]">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-xl-4">
                                                     <div class="my_profile_setting_input form-group">
                                                         <label for="planSize">Plan Size</label>
+<<<<<<< HEAD
                                                         <input type="text" class="form-control" id="planSize"
                                                             name="plan_size[]">
+=======
+                                                        <input type="text" class="form-control" id="planSize" name="plan_size[]">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <div class="wrap-custom-file">
+<<<<<<< HEAD
                                                         <input type="file" name="plan_image_path[]" id="planImage"
                                                             accept=".gif, .jpg, .jpeg, .png">
                                                         <label for="planImage">
                                                             <span><i class="flaticon-download"></i> Upload Plan
                                                                 Image</span>
+=======
+                                                        <input type="file" name="plan_image_path[]" id="planImage" accept=".gif, .jpg, .jpeg, .png">
+                                                        <label for="planImage">
+                                                            <span><i class="flaticon-download"></i> Upload Plan Image</span>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-8">
                                                     <div class="my_profile_setting_textarea mt30-991">
                                                         <label for="planDescription">Plan Description</label>
+<<<<<<< HEAD
                                                         <textarea class="form-control" id="planDescription"
                                                             name="plan_description[]" rows="8"></textarea>
+=======
+                                                        <textarea class="form-control" id="planDescription" name="plan_description[]" rows="8"></textarea>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                     </div>
                                                 </div>
                                             </div>
@@ -672,11 +859,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         const imageInput = document.getElementById('imageUploadInput');
         const previewList = document.getElementById('imagePreviewList');
 
+<<<<<<< HEAD
         imageInput.addEventListener('change', function () {
             previewList.innerHTML = '';
             [...this.files].forEach((file, index) => {
                 const reader = new FileReader();
                 reader.onload = function (e) {
+=======
+        imageInput.addEventListener('change', function() {
+            previewList.innerHTML = '';
+            [...this.files].forEach((file, index) => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                     const li = document.createElement('li');
                     li.classList.add('list-inline-item');
                     li.innerHTML = `
@@ -708,16 +903,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // Show attachment file name
+<<<<<<< HEAD
         document.getElementById('attachmentFile').addEventListener('change', function () {
+=======
+        document.getElementById('attachmentFile').addEventListener('change', function() {
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
             document.getElementById('attachmentName').value = this.files[0]?.name || '';
         });
     </script>
     <script>
+<<<<<<< HEAD
         document.getElementById('planImage').addEventListener('change', function (event) {
             const input = event.target;
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
+=======
+        document.getElementById('planImage').addEventListener('change', function(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                     const label = document.querySelector('label[for="planImage"]');
                     label.style.backgroundImage = `url('${e.target.result}')`;
                 };
@@ -726,7 +933,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         });
     </script>
     <script>
+<<<<<<< HEAD
         document.getElementById('addPlanBtn').addEventListener('click', function () {
+=======
+        document.getElementById('addPlanBtn').addEventListener('click', function() {
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
             let original = document.querySelector('.floor-plan-block');
             let clone = original.cloneNode(true);
 
@@ -746,13 +957,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         });
 
         // Delegate delete functionality
+<<<<<<< HEAD
         document.addEventListener('click', function (e) {
+=======
+        document.addEventListener('click', function(e) {
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
             if (e.target && e.target.classList.contains('removePlanBtn')) {
                 e.target.closest('.floor-plan-block').remove();
             }
         });
 
+<<<<<<< HEAD
         document.getElementById('planImage').addEventListener('change', function () {
+=======
+        document.getElementById('planImage').addEventListener('change', function() {
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
             const fileName = this.files[0]?.name || '';
             document.getElementById('imagePreview').textContent = fileName;
         });

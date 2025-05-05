@@ -1,9 +1,14 @@
 <?php
+<<<<<<< HEAD
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 include "../../include/db_connect.php";
+=======
+session_start();
+include("../../include/db_connect.php");
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 
 if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
     header("Location: ../login.php");
@@ -66,7 +71,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_password'])) {
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-6 mb10">
+<<<<<<< HEAD
                         <div class="breadcrumb_content">
+=======
+                        <div class="breadcrumb_content style2">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                             <h2 class="breadcrumb_title">Change password</h2>
                             <p>We are glad to see you again!</p>
                         </div>
@@ -76,14 +85,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_password'])) {
                             <div class="alert alert-success" id="passwordAlert">
                                 Password updated successfully!
                             </div>
+<<<<<<< HEAD
                         <?php elseif (!empty($password_error)): ?>
+=======
+                        <?php elseif (isset($password_error)): ?>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                             <div class="alert alert-danger" id="passwordAlert">
                                 <?php echo $password_error; ?>
                             </div>
                         <?php endif; ?>
                         <script>
+<<<<<<< HEAD
                             // Hide the alert after 3 seconds
                             setTimeout(function () {
+=======
+                            setTimeout(function() {
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                 var alert = document.getElementById('passwordAlert');
                                 if (alert) {
                                     alert.style.display = 'none';
@@ -103,8 +120,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_password'])) {
                                             <div class="col-xl-6">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="formGroupExampleOldPass">Old Password</label>
+<<<<<<< HEAD
                                                     <input type="password" class="form-control" name="old_password"
                                                         required>
+=======
+                                                    <input type="password" class="form-control" name="old_password" required>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                         </div>
@@ -112,21 +133,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_password'])) {
                                             <div class="col-lg-6 col-xl-6">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="formGroupExampleNewPass">New Password</label>
+<<<<<<< HEAD
                                                     <input type="password" class="form-control" name="new_password"
                                                         required>
+=======
+                                                    <input type="password" class="form-control" name="new_password" required>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-xl-6">
                                                 <div class="my_profile_setting_input form-group">
                                                     <label for="formGroupExampleConfPass">Confirm New Password</label>
+<<<<<<< HEAD
                                                     <input type="password" class="form-control" name="confirm_password"
                                                         required>
+=======
+                                                    <input type="password" class="form-control" name="confirm_password" required>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">
                                                 <div class="my_profile_setting_input float-right fn-520">
+<<<<<<< HEAD
                                                     <button class="btn btn2" name="update_password">Change
                                                         password</button>
+=======
+                                                    <button class="btn btn2" name="update_password">Change password</button>
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                         </div>

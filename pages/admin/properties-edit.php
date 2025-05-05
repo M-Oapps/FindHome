@@ -1,15 +1,22 @@
 <?php
 include("../../include/db_connect.php");
+<<<<<<< HEAD
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 $user_id = $_SESSION['user_id'] ?? null;
+=======
+session_start();
+
+$user_id = $_SESSION['user_id'] ?? null || $_SESSION['role'] ?? null;
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 if (!$user_id) {
     header("Location: ../login.php");
     exit();
 }
 
+<<<<<<< HEAD
 // Get types and cities
 $types = $conn->query("SELECT id, name FROM property_type")->fetchAll(PDO::FETCH_ASSOC);
 $cities = $conn->query("SELECT id, name FROM cities")->fetchAll(PDO::FETCH_ASSOC);
@@ -32,6 +39,27 @@ if (!$property) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     try {
         // Update property base info
+=======
+$types = $conn->query("SELECT id, name FROM property_type")->fetchAll(PDO::FETCH_ASSOC);
+$cities = $conn->query("SELECT id, name FROM cities")->fetchAll(PDO::FETCH_ASSOC);
+
+if (isset($_GET['id'])) {
+    $property_id = intval($_GET['id']);
+    // Fetch property data
+    $stmt = $conn->prepare("SELECT * FROM properties WHERE id = ? AND user_id = ?");
+    $stmt->execute([$property_id, $user_id]);
+    $property = $stmt->fetch(PDO::FETCH_ASSOC);
+    if (!$property) {
+        die("Property not found.");
+    }
+} else {
+    die("No property ID provided.");
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    try {
+        // 1. Update base property info
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
         $stmt = $conn->prepare("UPDATE properties SET
             user_id = :user_id,
             title = :title,
@@ -59,10 +87,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             year_built = :year_built,
             video_url = :video_url,
             virtual_tour_url = :virtual_tour_url,
+<<<<<<< HEAD
             is_featured = :is_featured,
             approval_status = :approval_status,
             sale_status = :sale_status
             WHERE id = :id");
+=======
+            is_featured = :is_featured
+        WHERE id = :id");
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 
         $stmt->execute([
             ':user_id' => $user_id,
@@ -89,6 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':garages' => $_POST['garages'],
             ':garage_size' => $_POST['garage_size'],
             ':year_built' => $_POST['year_built'],
+<<<<<<< HEAD
             ':video_url' => $_POST['video_url'] ?? $property['video_url'],
             ':virtual_tour_url' => $_POST['virtual_tour'] ?? $property['virtual_tour_url'],
             ':is_featured' => isset($_POST['is_featured']) ? 1 : 0,
@@ -98,6 +132,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ]);
 
         // Update amenities
+=======
+            ':video_url' => $_POST['video_url'],
+            ':virtual_tour_url' => $_POST['virtual_tour'],
+            ':is_featured' => isset($_POST['is_featured']) ? 1 : 0,
+            ':id' => $property_id
+        ]);
+
+        // 2. Update amenities
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
         $conn->prepare("DELETE FROM property_amenities WHERE property_id = ?")->execute([$property_id]);
 
         if (!empty($_POST['amenities'])) {
@@ -107,12 +150,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
 
+<<<<<<< HEAD
         // Upload new images (don't delete old unless manually handled)
         if (!empty($_FILES['images']['name'][0])) {
             $uploadDir = '../../images/uploads/images/';
             $uploadUrl = 'images/uploads/images/';
             if (!file_exists($uploadDir))
                 mkdir($uploadDir, 0777, true);
+=======
+        // 3. Upload new images
+        if (!empty($_FILES['images']['name'][0])) {
+            $uploadDir = '../../images/uploads/images/';
+            $uploadUrl = 'images/uploads/images/';
+            if (!file_exists($uploadDir)) mkdir($uploadDir, 0777, true);
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 
             foreach ($_FILES['images']['tmp_name'] as $key => $tmp_name) {
                 if ($_FILES['images']['error'][$key] === 0) {
@@ -127,12 +178,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
 
+<<<<<<< HEAD
         // Upload attachment if present
         if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] === 0) {
             $attachDir = '../../images/uploads/attachments/';
             $attachUrl = 'images/uploads/attachments/';
             if (!file_exists($attachDir))
                 mkdir($attachDir, 0777, true);
+=======
+        // 4. Upload attachment (replace old one)
+        if (isset($_FILES['attachment']) && $_FILES['attachment']['error'] === 0) {
+            $attachDir = '../../images/uploads/attachments/';
+            $attachUrl = 'images/uploads/attachments/';
+            if (!file_exists($attachDir)) mkdir($attachDir, 0777, true);
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 
             $filename = time() . '_' . basename($_FILES['attachment']['name']);
             $targetFile = $attachDir . $filename;
@@ -143,10 +202,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
 
+<<<<<<< HEAD
         // Update floorplans only if new ones added
         if (!empty($_POST['plan_title'])) {
             $conn->prepare("DELETE FROM property_floorplans WHERE property_id = ?")->execute([$property_id]);
 
+=======
+        // 5. Floorplans - delete and re-insert (or use a smarter update logic)
+        $conn->prepare("DELETE FROM property_floorplans WHERE property_id = ?")->execute([$property_id]);
+
+        if (!empty($_POST['plan_title'])) {
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
             $stmt = $conn->prepare("INSERT INTO property_floorplans (
                 property_id, title, bedrooms, bathrooms, price,
                 price_postfix, size, image_path, description
@@ -154,8 +220,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $floorImageDir = '../../images/uploads/floorplans/';
             $floorImageUrl = 'images/uploads/floorplans/';
+<<<<<<< HEAD
             if (!file_exists($floorImageDir))
                 mkdir($floorImageDir, 0777, true);
+=======
+            if (!file_exists($floorImageDir)) mkdir($floorImageDir, 0777, true);
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
 
             foreach ($_POST['plan_title'] as $i => $title) {
                 $imgPath = '';
@@ -180,10 +250,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         }
 
+<<<<<<< HEAD
         // Redirect to property list after success
         header("Location: properties-list.php");
         exit();
 
+=======
+        header("Location: properties-list.php");
+        exit();
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
@@ -292,7 +367,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                             <div class="col-lg-4 col-xl-4">
                                                 <div class="my_profile_setting_input ui_kit_select_search form-group">
                                                     <label>Status</label>
+<<<<<<< HEAD
                                                     <select class="selectpicker" data-width="100%" name="status">
+=======
+                                                    <select class="selectpicker" data-live-search="true" data-width="100%" name="status">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                         <option value="">Select Status</option>
                                                         <option value="Rent" <?= ($property['status'] == 'Rent') ? 'selected' : '' ?>>Rent</option>
                                                         <option value="Sale" <?= ($property['status'] == 'Sale') ? 'selected' : '' ?>>Sale</option>
@@ -431,6 +510,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                     <input type="text" class="form-control" id="bathRooms" name="bathrooms" value="<?= htmlspecialchars($property['bathrooms'] ?? '') ?>">
                                                 </div>
                                             </div>
+<<<<<<< HEAD
                                             <div class="col-lg-4 col-xl-4">
                                                 <div class="my_profile_setting_input ui_kit_select_search form-group">
                                                     <label>Garages</label>
@@ -440,6 +520,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                         <option value="No" <?= ($property['garages'] == 'No') ? 'selected' : '' ?>>No</option>
                                                         <option value="Other" <?= ($property['garages'] == 'Other') ? 'selected' : '' ?>>Other</option>
                                                     </select>
+=======
+                                            <div class="col-lg-6 col-xl-4">
+                                                <div class="my_profile_setting_input form-group">
+                                                    <label for="garages">Garages</label>
+                                                    <input type="text" class="form-control" id="garages" name="garages" value="<?= htmlspecialchars($property['garages'] ?? '') ?>">
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-xl-4">
@@ -518,6 +604,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                     </ul>
                                                 </div>
                                             <?php endforeach; ?>
+<<<<<<< HEAD
                                 
                                              <div class="col-lg-6 col-xl-6">
                                                 <div class="my_profile_setting_input ui_kit_select_search form-group">
@@ -542,6 +629,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                     </select>
                                                 </div>
                                             </div>
+=======
+>>>>>>> 410f9ed0f0c7bac4540d6ad97ac55dc69cea551a
                                         </div>
                                     </div>
                                     <div class="my_dashboard_review mt30">

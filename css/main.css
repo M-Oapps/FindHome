@@ -1,0 +1,49 @@
+:root {
+  --primary-color: #10b981;
+  --heading-color: #1f2937;
+  --body-color: #6b7280;
+  --white-color: #ffffff;
+  --heading-font: "Poppins", sans-serif;
+  --body-font: "Karla", Helvetica, Arial, Lucida, sans-serif;
+
+  /* Font sizes */
+  --h1-size: 2.5rem;
+  --h2-size: 2rem;
+  --h3-size: 1.75rem;
+  --h4-size: 1.5rem;
+  --h5-size: 1.25rem;
+  --h6-size: 1rem;
+  --body-size: 1rem;
+  --small-size: 0.875rem;
+
+  /* Line heights */
+  --heading-line-height: 1.2;
+  --body-line-height: 1.6;
+
+  /* Link */
+  --link-color: var(--primary-color);
+  --link-hover-color: #0e9f6e;
+}
+
+.btn-thm2 {
+  background-color: var(--white-color);
+  border-color: var(--white-color);
+  color: var(--primary-color);
+  font-size: 18px;
+  border-radius: 8px;
+  padding: 25px;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0px 1px 4px 0px rgba(255, 90, 95, 0.3);
+  text-decoration: none;
+}
+
+.btn-thm2:hover,
+.btn-thm2:active,
+.btn-thm2:focus {
+  background-color: var(--heading-color);
+  border-color: var(--heading-color);
+  color: var(--white-color);
+  text-decoration: none;
+}
